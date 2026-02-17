@@ -1,0 +1,64 @@
+.landing {
+  padding: 0 20px;
+}
+
+.hero {
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.hero h1 {
+  font-size: 48px;
+  color: #22c55e;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 18px;
+  max-width: 700px;
+  margin: auto;
+  margin-bottom: 40px;
+  color: #cbd5e1;
+}
+
+.cta-buttons .btn {
+  padding: 12px 25px;
+  margin: 0 10px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.primary {
+  background-color: #22c55e;
+  color: black;
+}
+
+.secondary {
+  border: 1px solid #22c55e;
+  color: #22c55e;
+}
+
+.features {
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+  margin-top: 40px;
+}
+
+.feature-card {
+  background-color: #111827;
+  padding: 25px;
+  border-radius: 12px;
+}
+
+.impact {
+  padding: 80px 20px;
+  text-align: center;
+  background-color: #111827;
+}

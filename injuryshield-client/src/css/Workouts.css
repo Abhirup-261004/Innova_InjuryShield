@@ -1,0 +1,16 @@
+.workouts-container {
+  padding: 40px;
+}
+
+.workout-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.workout-card {
+  background-color: #111827;
+  padding: 20px;
+  border-radius: 10px;
+}

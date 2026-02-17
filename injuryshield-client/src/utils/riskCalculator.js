@@ -1,0 +1,23 @@
+export function calculateRisk(acwrData, checkin) {
+  if (!checkin) return 0;
+
+  const { acwr } = acwrData || { acwr: 0 };
+
+  let risk = 0;
+
+  // ACWR-based risk scoring
+  if (acwr >= 1.5) risk += 35;
+  else if (acwr >= 1.3) risk += 20;
+  else if (acwr > 0) risk += 5; // some load exists
+
+  // Recovery-based scoring
+  if (checkin.sleep < 6) risk += 15;
+  if (checkin.fatigue > 7) risk += 15;
+  if (checkin.soreness > 7) risk += 15;
+  if (checkin.stress > 7) risk += 10;
+  if (checkin.pain) risk += 20;
+
+  if (risk > 100) risk = 100;
+  return risk;
+}
+

@@ -1,0 +1,29 @@
+.checkin-container {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+}
+
+.checkin-form {
+  background-color: #111827;
+  padding: 30px;
+  border-radius: 12px;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.checkin-form input {
+  margin-bottom: 15px;
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+}
+
+.checkin-form button {
+  padding: 10px;
+  background-color: #22c55e;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+}

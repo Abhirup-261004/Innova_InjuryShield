@@ -1,0 +1,28 @@
+.coach-container {
+  padding: 40px;
+}
+
+.coach-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.coach-card {
+  background: #111827;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+@media (max-width: 1000px) {
+  .coach-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .coach-grid {
+    grid-template-columns: 1fr;
+  }
+}
