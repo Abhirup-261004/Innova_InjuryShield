@@ -47,7 +47,7 @@ exports.getAcwrTrend = async (req, res) => {
 };
 
 exports.getAllUsersSummary = async (req, res) => {
-  if (req.user.role !== "coach") {
+  if ((req.user.role || "").toLowerCase()!== "coach"){
     return res.status(403).json({ message: "Access denied" });
   }
 

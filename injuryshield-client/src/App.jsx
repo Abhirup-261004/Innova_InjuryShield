@@ -35,7 +35,7 @@ function App() {
         <Route
           path="/coach"
           element={
-            <ProtectedRoute>
+            <ProtectedRoute allowedRoles={["coach"]}>
               <CoachDashboard />
             </ProtectedRoute>
           }

@@ -8,7 +8,7 @@ function Signup() {
     name: "",
     email: "",
     password: "",
-    role: "user" // default role
+    role: "user" // default
   });
 
   const [loading, setLoading] = useState(false);
