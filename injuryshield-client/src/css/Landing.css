@@ -45,9 +45,9 @@
 }
 
 .cta-buttons .btn {
-  padding: 16px 32px;
-  margin: 0 12px;
-  border-radius: 14px;
+  padding: 12px 24px;
+  margin: 0 8px;
+  border-radius: 12px;
   text-decoration: none;
   font-weight: 600;
   font-size: 16px;
@@ -57,6 +57,9 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
   position: relative;
   overflow: hidden;
+  min-width: 120px;
+  max-width: 160px;
+  text-align: center;
 }
 
 .cta-buttons .btn::before {
@@ -66,34 +69,23 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  
 }
 
-.primary {
-  background: rgba(59, 130, 246, 0.15);
-  color: #E6EDF6;
-  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.15);
+.cta-buttons .btn.primary {
+  background:linear-gradient(135deg, #3B82F6 0%, #22D3EE 100%);
+  color: #FFFFFF;
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
 }
 
 .primary:hover {
-  background: rgba(59, 130, 246, 0.25);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(59, 130, 246, 0.25);
-  border-color: rgba(59, 130, 246, 0.3);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 32px rgba(59, 130, 246, 0.5), 0 0 20px rgba(34, 211, 238, 0.3);
+  border-color: rgba(34, 211, 238, 0.6);
+  filter: brightness(1.1);
 }
 
-.secondary {
-  background: rgba(255, 255, 255, 0.04);
-  color: #E6EDF6;
-  border-color: rgba(255, 255, 255, 0.08);
-}
-
-.secondary:hover {
-  background: rgba(255, 255, 255, 0.08);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(34, 211, 238, 0.15);
-  border-color: rgba(34, 211, 238, 0.3);
-}
 
 .features {
   padding: 20px 20px 60px;

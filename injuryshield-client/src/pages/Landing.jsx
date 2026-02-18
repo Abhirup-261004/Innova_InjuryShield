@@ -1,10 +1,18 @@
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import "../css/Landing.css";
 
 function Landing() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const userInfo = localStorage.getItem("userInfo");
+    setIsLoggedIn(!!userInfo);
+  }, []);
+
   return (
     <div className="landing">
-      {/* Premium Pattern Background */}
+      {/* Premium Pattern Background */}  
       <div className="premium-pattern"></div>
 
       {/* Hero Section */}
@@ -17,7 +25,7 @@ function Landing() {
 
         <div className="cta-buttons">
           <Link to="/signup" className="btn primary">Get Started</Link>
-          <Link to="/login" className="btn secondary">Login</Link>
+          {!isLoggedIn && <Link to="/login" className="btn secondary">Login</Link>}
         </div>
       </section>
 

@@ -3,20 +3,13 @@ import API from "../api/axios";
 import "../css/InjuryRadar.css";
 import BodyMapPicker from "../components/BodyMapPicker";
 
-const BODY_PARTS = [
-  { key: "shoulder", label: "Shoulder" },
-  { key: "knee", label: "Knee" },
-  { key: "lowerBack", label: "Lower Back" },
-  { key: "ankle", label: "Ankle" },
-  { key: "hip", label: "Hip" },
-  { key: "elbow", label: "Elbow" },
-];
-
 const SESSION_TYPES = [
-  "Strength Upper",
-  "Strength Lower",
-  "Running",
-  "Cycling",
+  "Strength (Upper)",
+  "Strength (Lower)",
+  "Hypertrophy",
+  "HIIT",
+  "Cardio",
+  "Sport Practice",
 ];
 
 const INTENSITY = ["Easy", "Normal", "Hard"];
@@ -42,7 +35,7 @@ export default function InjuryRadar() {
   const [planned, setPlanned] = useState(
     days.map((d) => ({
       date: d.toISOString(),
-      sessionType: "Strength Upper",
+      sessionType: "Strength (Upper)",
       intensityLevel: "Normal",
     }))
   );

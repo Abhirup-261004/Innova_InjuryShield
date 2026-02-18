@@ -41,14 +41,20 @@ function AddWorkout() {
       <form className="workout-form" onSubmit={handleSubmit}>
         <h2>Add Workout</h2>
 
-        <input
-          type="text"
+        <select
           name="type"
-          placeholder="Workout Type"
           value={form.type}
           onChange={handleChange}
           required
-        />
+        >
+          <option value="">Select Workout Type</option>
+          <option value="Strength (Upper)">Strength (Upper)</option>
+          <option value="Strength (Lower)">Strength (Lower)</option>
+          <option value="Hypertrophy">Hypertrophy</option>
+          <option value="HIIT">HIIT</option>
+          <option value="Cardio">Cardio</option>
+          <option value="Sport Practice">Sport Practice</option>
+        </select>
 
         <input
           type="number"

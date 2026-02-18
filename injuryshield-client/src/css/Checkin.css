@@ -89,10 +89,13 @@
   appearance: none;
   height: 6px;
   background: rgba(255, 255, 255, 0.1);
-  border-radius: 3px;
+  border-radius: 20px;
   outline: none;
-  margin: 20px 0;
+  margin: 20px auto;
+  padding: 0;
   cursor: pointer;
+  display: block;
+  width: 100%;
 }
 
 .checkin-form input[type="range"]::-webkit-slider-thumb {
