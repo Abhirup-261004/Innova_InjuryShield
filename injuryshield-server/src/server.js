@@ -20,7 +20,7 @@ connectDB();
 // Middleware
 app.use(express.json());
 
-const allowedOrigins = ["http://localhost:5173", "http://127.0.0.1:5173"];
+const allowedOrigins = ["http://localhost:5173", "http://127.0.0.1:5173","https://your-frontend.vercel.app"];
 
 app.use(
   cors({
