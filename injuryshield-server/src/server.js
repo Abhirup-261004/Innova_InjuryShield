@@ -28,13 +28,7 @@ const allowedOrigins = [
 
 app.use(
   cors({
-    origin: (origin, callback) => {
-        if (/^https:\/\/injuryshield(-[\w-]+)?\.vercel\.app$/.test(origin))
-  return callback(null, true);
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.includes(origin)) return callback(null, true);
-      return callback(new Error("CORS blocked for origin: " + origin));
-    },
+    origin:true, // allow all origins for development; in production, set to allowedOrigins
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
