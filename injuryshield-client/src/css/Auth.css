@@ -47,3 +47,103 @@
   cursor: pointer;
 }
 
+/* Enhanced Auth Styles - AI Performance Lab Theme */
+
+.auth-container {
+  animation: fadeInContainer 0.8s ease-out;
+}
+
+.auth-form {
+  background: rgba(255, 255, 255, 0.04) !important;
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  transition: all 250ms ease;
+  animation: fadeInForm 1s ease-out 0.2s both;
+}
+
+.auth-form h2 {
+  background: linear-gradient(135deg, #3B82F6, #22D3EE) !important;
+  background-clip: text !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  text-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.2));
+}
+
+.auth-form input {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 10px !important;
+  color: #E6EDF6;
+  transition: all 200ms ease;
+}
+
+.auth-form input::placeholder {
+  color: #9CA3AF;
+}
+
+.auth-form input:focus {
+  outline: none;
+  border-color: rgba(59, 130, 246, 0.4);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.auth-form button {
+  background: rgba(59, 130, 246, 0.8) !important;
+  border-radius: 12px !important;
+  color: #E6EDF6;
+  transition: all 200ms ease;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.auth-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+  background: rgba(59, 130, 246, 0.9) !important;
+  border-color: rgba(59, 130, 246, 0.5);
+}
+
+.role-selector {
+  opacity: 0.9;
+  transition: all 200ms ease;
+}
+
+.role-selector label {
+  color: #9CA3AF;
+  transition: all 200ms ease;
+}
+
+.role-selector label:hover {
+  color: #E6EDF6;
+  filter: brightness(1.2);
+}
+
+.role-selector input[type="radio"]:checked + label {
+  color: #3B82F6;
+}
+
+@keyframes fadeInContainer {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInForm {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

@@ -4,6 +4,8 @@ import "../css/Landing.css";
 function Landing() {
   return (
     <div className="landing">
+      {/* Premium Pattern Background */}
+      <div className="premium-pattern"></div>
 
       {/* Hero Section */}
       <section className="hero">

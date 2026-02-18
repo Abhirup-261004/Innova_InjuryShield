@@ -1,0 +1,6 @@
+node_modules/
+injuryshield-client/node_modules/
+injuryshield-server/node_modules/
+.env
+dist/
+build/
