@@ -3,9 +3,9 @@ const Workout = require("../models/Workout");
 // Add workout
 exports.addWorkout = async (req, res) => {
   try {
-    const { type, duration, rpe } = req.body;
+    const { type, duration, rpe, date, notes } = req.body;
 
-    const load = duration * rpe;
+    const load = Number(duration) * Number(rpe);
 
     const workout = await Workout.create({
       user: req.user._id,
@@ -13,11 +13,11 @@ exports.addWorkout = async (req, res) => {
       duration,
       rpe,
       load,
+      notes: notes || "",
       date: date ? new Date(date) : new Date(),
     });
 
     res.status(201).json(workout);
-
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

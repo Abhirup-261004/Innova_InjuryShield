@@ -25,15 +25,19 @@ function AddWorkout() {
     }
   };
 
-  const handleSubmit = (e) => {
-        e.preventDefault();
-        addWorkout({
-            type: form.type,
-            duration: Number(form.duration),
-            rpe: Number(form.rpe)
-        });
-        alert("Workout Saved!");
-    };
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    await addWorkout({
+      type: form.type,
+      duration: Number(form.duration),
+      rpe: Number(form.rpe),
+    });
+    alert("Workout Saved!");
+  } catch {
+    alert("Failed to save workout");
+  }
+};
 
 
   return (
