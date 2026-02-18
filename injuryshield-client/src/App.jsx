@@ -11,6 +11,7 @@ import WeeklyPlanBuilder from "./pages/WeeklyPlanBuilder";
 import ProtectedRoute from "./components/ProtectedRoute";
 import CoachDashboard from "./pages/CoachDashboard";
 import InjuryRadar from "./pages/InjuryRadar";
+import ChatPage from "./pages/ChatPage";
 
 function App() {
   return (
@@ -56,6 +57,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route path="/chat" element={<ProtectedRoute><ChatPage /></ProtectedRoute>} />
       </Routes>
     </>
   );

@@ -9,6 +9,9 @@ const analyticsRoutes = require("./routes/analyticsRoutes");
 const planRoutes = require("./routes/planRoutes");
 const injuryradarRoutes = require("./routes/injuryRadarRoutes");
 
+const http = require("http");
+const initSocket = require("./socket"); // points to src/socket/index.js
+const chatRoutes = require("./routes/chatRoutes");
 
 dotenv.config();
 
@@ -85,11 +88,17 @@ app.use("/api/checkins", checkinRoutes);
 app.use("/api/analytics", analyticsRoutes);
 app.use("/api/plans", planRoutes);
 app.use("/api/injury-radar", injuryradarRoutes)
+app.use("/api/chat", chatRoutes);
+
 
 // Start Server
 const PORT = process.env.PORT || 8000;
+const server = http.createServer(app);
 
-app.listen(PORT, () => {
+// init sockets
+initSocket(server);
+
+server.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
 
