@@ -20,21 +20,24 @@ connectDB();
 // Middleware
 app.use(express.json());
 
-const allowedOrigins = ["http://localhost:5173", "http://127.0.0.1:5173","https://injuryshield.vercel.app"];
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://127.0.0.1:5173",
+  process.env.CLIENT_URL,
+].filter(Boolean);
 
 app.use(
   cors({
     origin: (origin, callback) => {
-      // allow server-to-server / Postman / curl (no origin)
+        if (/^https:\/\/injuryshield(-[\w-]+)?\.vercel\.app$/.test(origin))
+  return callback(null, true);
       if (!origin) return callback(null, true);
-
       if (allowedOrigins.includes(origin)) return callback(null, true);
-
       return callback(new Error("CORS blocked for origin: " + origin));
     },
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"]
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
