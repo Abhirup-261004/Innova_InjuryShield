@@ -6,6 +6,8 @@ const authRoutes = require("./routes/authRoutes");
 const workoutRoutes = require("./routes/workoutRoutes");
 const checkinRoutes = require("./routes/checkinRoutes");
 const analyticsRoutes = require("./routes/analyticsRoutes");
+const planRoutes = require("./routes/planRoutes");
+const injuryradarRoutes = require("./routes/injuryRadarRoutes");
 
 
 dotenv.config();
@@ -84,7 +86,8 @@ app.use("/api/auth", authRoutes);
 app.use("/api/workouts", workoutRoutes);
 app.use("/api/checkins", checkinRoutes);
 app.use("/api/analytics", analyticsRoutes);
-
+app.use("/api/plans", planRoutes);
+app.use("/api/injury-radar", injuryradarRoutes)
 
 // Start Server
 const PORT = process.env.PORT || 8000;

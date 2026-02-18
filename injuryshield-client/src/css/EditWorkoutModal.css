@@ -1,0 +1,47 @@
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal-card {
+  width: min(520px, 92vw);
+  background: #111;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.modal-form {
+  display: grid;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.modal-form input,
+.modal-form select,
+.modal-form textarea {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: #0b0b0b;
+  color: #fff;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.modal-actions button {
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+}

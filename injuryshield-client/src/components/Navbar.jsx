@@ -35,7 +35,8 @@ function Navbar() {
             <Link to="/checkin">Check-in</Link>
             <Link to="/workouts/new">Add Workout</Link>
             <Link to="/workouts">Workouts</Link>
-            <Link to="/plan">Weekly Plan</Link>
+            <Link to="/injury-radar">Injury Radar</Link>
+            <Link to="/plan-builder">Plan Builder</Link>
 
             {/* Coach Dashboard Link */}
             {userInfo.role === "coach" && (

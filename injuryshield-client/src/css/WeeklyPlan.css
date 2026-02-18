@@ -1,0 +1,67 @@
+.plan-container {
+  padding: 30px;
+}
+
+.plan-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.day-selector {
+  display: flex;
+  gap: 8px;
+}
+
+.day-selector button {
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.day-selector button.active {
+  background: #22c55e;
+  color: white;
+}
+
+.calendar-view {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+}
+
+.calendar-card {
+  background: #111827;
+  padding: 15px;
+  border-radius: 12px;
+  color: white;
+  border: 1px solid #222;
+}
+
+.save-btn {
+  background: #22c55e;
+  color: white;
+  padding: 8px 12px;
+}
+
+.calendar-card.completed {
+  border: 2px solid #22c55e;
+  background: #052e1c;
+}
+
+.completed-badge {
+  background: #22c55e;
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+.complete-btn {
+  margin-top: 10px;
+  background: #22c55e;
+  border: none;
+  padding: 6px 10px;
+  color: white;
+  cursor: pointer;
+}
