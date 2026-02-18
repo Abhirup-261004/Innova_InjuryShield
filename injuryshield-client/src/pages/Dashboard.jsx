@@ -3,6 +3,7 @@ import "../css/Dashboard.css";
 import { useInjury } from "../contexts/InjuryContext";
 import AcwrTrendChart from "../components/AcwrTrendChart";
 import LoadChart from "../components/LoadChart";
+import AcwrEwmaChart from "../components/AcwrEwmaChart";
 
 
 function Dashboard() {
@@ -96,6 +97,11 @@ function Dashboard() {
         <div className="card">
             <h3>ACWR Trend (Last 14 Days)</h3>
             <AcwrTrendChart data={acwrTrend} />
+        </div>
+
+        <div className="card">
+            <h3>ACWR EWMA Trend (Last 60 Days)</h3>
+            <AcwrEwmaChart />
         </div>
 
 

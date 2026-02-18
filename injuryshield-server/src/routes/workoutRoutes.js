@@ -1,14 +1,21 @@
 const express = require("express");
 const router = express.Router();
-const { addWorkout, getWorkouts } = require("../controllers/workoutController");
 const { protect } = require("../middleware/authMiddleware");
-const { getWorkoutTrend } = require("../controllers/workoutController");
+const {
+  addWorkout,
+  getWorkouts,
+  updateWorkout,
+  deleteWorkout,
+} = require("../controllers/workoutController");
 
+// List + Create
 router.route("/")
-  .post(protect, addWorkout)
-  .get(protect, getWorkouts);
+  .get(protect, getWorkouts)
+  .post(protect, addWorkout);
 
-router.get("/trend", protect, getWorkoutTrend);
-
+// Update + Delete (optional, but useful)
+router.route("/:id")
+  .put(protect, updateWorkout)
+  .delete(protect, deleteWorkout);
 
 module.exports = router;

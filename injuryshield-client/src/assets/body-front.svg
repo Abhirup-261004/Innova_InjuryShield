@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 640">
+  <rect width="100%" height="100%" fill="transparent"/>
+
+  <!-- Head -->
+  <circle cx="160" cy="70" r="40" fill="currentColor" opacity="0.08"/>
+
+  <!-- Torso -->
+  <path d="M125 120 C135 105 185 105 195 120 L215 220 C220 250 210 300 200 330 L190 380 C185 405 135 405 130 380 L120 330 C110 300 100 250 105 220 Z"
+        fill="currentColor" opacity="0.08"/>
+
+  <!-- Left Arm -->
+  <path d="M115 135 C85 155 70 190 65 225 C60 265 70 290 85 315 C95 330 115 320 110 300 C100 260 100 220 115 180 Z"
+        fill="currentColor" opacity="0.06"/>
+
+  <!-- Right Arm -->
+  <path d="M205 135 C235 155 250 190 255 225 C260 265 250 290 235 315 C225 330 205 320 210 300 C220 260 220 220 205 180 Z"
+        fill="currentColor" opacity="0.06"/>
+
+  <!-- Legs -->
+  <path d="M135 405 C125 460 120 520 125 590 C127 610 145 610 147 590 C152 535 150 480 155 420 Z"
+        fill="currentColor" opacity="0.06"/>
+  <path d="M185 405 C195 460 200 520 195 590 C193 610 175 610 173 590 C168 535 170 480 165 420 Z"
+        fill="currentColor" opacity="0.06"/>
+
+  <!-- Click zones (transparent paths with ids) -->
+  <!-- Shoulder -->
+  <path id="zone-shoulder" d="M108 140 C90 155 82 175 78 195 C85 198 94 200 105 195 C112 175 118 160 125 150 C120 145 115 142 108 140 Z"
+        fill="transparent"/>
+  <path id="zone-shoulder-r" d="M212 140 C230 155 238 175 242 195 C235 198 226 200 215 195 C208 175 202 160 195 150 C200 145 205 142 212 140 Z"
+        fill="transparent"/>
+
+  <!-- Elbow -->
+  <circle id="zone-elbow" cx="92" cy="255" r="22" fill="transparent"/>
+  <circle id="zone-elbow-r" cx="228" cy="255" r="22" fill="transparent"/>
+
+  <!-- Knee -->
+  <circle id="zone-knee" cx="145" cy="505" r="24" fill="transparent"/>
+  <circle id="zone-knee-r" cx="175" cy="505" r="24" fill="transparent"/>
+
+  <!-- Ankle -->
+  <circle id="zone-ankle" cx="140" cy="585" r="18" fill="transparent"/>
+  <circle id="zone-ankle-r" cx="180" cy="585" r="18" fill="transparent"/>
+
+  <!-- Hip -->
+  <ellipse id="zone-hip" cx="145" cy="420" rx="22" ry="18" fill="transparent"/>
+  <ellipse id="zone-hip-r" cx="175" cy="420" rx="22" ry="18" fill="transparent"/>
+
+  <!-- Lower Back (front approximated as core) -->
+  <rect id="zone-lowerBack" x="135" y="240" width="50" height="70" fill="transparent"/>
+</svg>

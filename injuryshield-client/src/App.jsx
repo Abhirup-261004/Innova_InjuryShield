@@ -7,10 +7,10 @@ import Dashboard from "./pages/Dashboard";
 import DailyCheckin from "./pages/DailyCheckin";
 import AddWorkout from "./pages/AddWorkout";
 import Workouts from "./pages/Workouts";
-import WeeklyPlan from "./pages/WeeklyPlan";
+import WeeklyPlanBuilder from "./pages/WeeklyPlanBuilder";
 import ProtectedRoute from "./components/ProtectedRoute";
 import CoachDashboard from "./pages/CoachDashboard";
-
+import InjuryRadar from "./pages/InjuryRadar";
 
 function App() {
   return (
@@ -31,7 +31,23 @@ function App() {
         <Route path="/checkin" element={<DailyCheckin />} />
         <Route path="/workouts/new" element={<AddWorkout />} />
         <Route path="/workouts" element={<Workouts />} />
-        <Route path="/plan" element={<WeeklyPlan />} />
+        <Route
+          path="/plan-builder"
+          element={
+            <ProtectedRoute>
+              <WeeklyPlanBuilder />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/injury-radar" 
+          element={
+            <ProtectedRoute>
+              <InjuryRadar />
+            </ProtectedRoute>
+          } 
+        />
+
         <Route
           path="/coach"
           element={

@@ -15,3 +15,39 @@
   padding: 20px;
   border-radius: 10px;
 }
+
+.workouts-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 12px 0 18px;
+}
+
+.workouts-filters input,
+.workouts-filters select {
+  padding: 8px;
+}
+
+.workouts-filters button {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.pagination-bar {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  margin: 18px 0;
+}
+
+.workout-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.workout-actions button {
+  padding: 7px 10px;
+  cursor: pointer;
+}

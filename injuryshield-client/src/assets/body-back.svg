@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 640">
+  <rect width="100%" height="100%" fill="transparent"/>
+
+  <!-- Head -->
+  <circle cx="160" cy="70" r="40" fill="currentColor" opacity="0.08"/>
+
+  <!-- Back torso -->
+  <path d="M120 125 C135 110 185 110 200 125 L220 230 C225 260 215 315 205 345 L195 395 C190 420 130 420 125 395 L115 345 C105 315 95 260 100 230 Z"
+        fill="currentColor" opacity="0.08"/>
+
+  <!-- Arms -->
+  <path d="M110 140 C80 165 65 205 60 245 C55 285 70 315 90 340 C105 360 120 345 112 325 C98 290 98 240 110 190 Z"
+        fill="currentColor" opacity="0.06"/>
+  <path d="M210 140 C240 165 255 205 260 245 C265 285 250 315 230 340 C215 360 200 345 208 325 C222 290 222 240 210 190 Z"
+        fill="currentColor" opacity="0.06"/>
+
+  <!-- Legs -->
+  <path d="M135 420 C125 470 120 530 125 595 C127 615 145 615 147 595 C152 545 150 485 155 435 Z"
+        fill="currentColor" opacity="0.06"/>
+  <path d="M185 420 C195 470 200 530 195 595 C193 615 175 615 173 595 C168 545 170 485 165 435 Z"
+        fill="currentColor" opacity="0.06"/>
+
+  <!-- Click zones -->
+  <rect id="zone-lowerBack" x="130" y="245" width="60" height="90" fill="transparent"/>
+  <path id="zone-shoulder" d="M110 145 C95 160 85 178 80 195 C88 200 98 202 110 198 C118 178 124 162 130 155 C124 150 118 147 110 145 Z" fill="transparent"/>
+  <path id="zone-shoulder-r" d="M210 145 C225 160 235 178 240 195 C232 200 222 202 210 198 C202 178 196 162 190 155 C196 150 202 147 210 145 Z" fill="transparent"/>
+
+  <circle id="zone-elbow" cx="92" cy="265" r="22" fill="transparent"/>
+  <circle id="zone-elbow-r" cx="228" cy="265" r="22" fill="transparent"/>
+
+  <ellipse id="zone-hip" cx="145" cy="435" rx="22" ry="18" fill="transparent"/>
+  <ellipse id="zone-hip-r" cx="175" cy="435" rx="22" ry="18" fill="transparent"/>
+
+  <circle id="zone-knee" cx="145" cy="520" r="24" fill="transparent"/>
+  <circle id="zone-knee-r" cx="175" cy="520" r="24" fill="transparent"/>
+
+  <circle id="zone-ankle" cx="140" cy="595" r="18" fill="transparent"/>
+  <circle id="zone-ankle-r" cx="180" cy="595" r="18" fill="transparent"/>
+</svg>

@@ -6,6 +6,8 @@ const authRoutes = require("./routes/authRoutes");
 const workoutRoutes = require("./routes/workoutRoutes");
 const checkinRoutes = require("./routes/checkinRoutes");
 const analyticsRoutes = require("./routes/analyticsRoutes");
+const planRoutes = require("./routes/planRoutes");
+const injuryradarRoutes = require("./routes/injuryRadarRoutes");
 
 
 dotenv.config();
@@ -18,21 +20,18 @@ connectDB();
 // Middleware
 app.use(express.json());
 
-const allowedOrigins = ["http://localhost:5173", "http://127.0.0.1:5173"];
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://127.0.0.1:5173",
+  process.env.CLIENT_URL,
+].filter(Boolean);
 
 app.use(
   cors({
-    origin: (origin, callback) => {
-      // allow server-to-server / Postman / curl (no origin)
-      if (!origin) return callback(null, true);
-
-      if (allowedOrigins.includes(origin)) return callback(null, true);
-
-      return callback(new Error("CORS blocked for origin: " + origin));
-    },
+    origin:true, // allow all origins for development; in production, set to allowedOrigins
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"]
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
@@ -84,7 +83,8 @@ app.use("/api/auth", authRoutes);
 app.use("/api/workouts", workoutRoutes);
 app.use("/api/checkins", checkinRoutes);
 app.use("/api/analytics", analyticsRoutes);
-
+app.use("/api/plans", planRoutes);
+app.use("/api/injury-radar", injuryradarRoutes)
 
 // Start Server
 const PORT = process.env.PORT || 8000;

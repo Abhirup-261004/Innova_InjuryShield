@@ -1,0 +1,109 @@
+.bodymap-card {
+  background: #111827;
+  border: 1px solid #1f2937;
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.bodymap-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.meta { opacity: 0.8; margin: 6px 0 0; }
+
+.toggle {
+  display: flex;
+  background: #0b1220;
+  border: 1px solid #1f2937;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.toggle button {
+  padding: 8px 12px;
+  border: 0;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  opacity: 0.7;
+}
+.toggle button.active {
+  background: #22c55e;
+  color: #0b1220;
+  opacity: 1;
+  font-weight: 700;
+}
+
+.bodymap-selected {
+  margin-top: 10px;
+  opacity: 0.9;
+}
+.pill {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #0b1220;
+  border: 1px solid #1f2937;
+}
+
+.bodymap-wrap {
+  margin-top: 12px;
+  border-radius: 14px;
+  border: 1px solid #1f2937;
+  background: radial-gradient(ellipse at top, rgba(34,197,94,0.08), rgba(17,24,39,1));
+  padding: 14px;
+  position: relative;
+  overflow: hidden;
+  color: #e5e7eb;
+}
+
+.bodysvg {
+  width: 100%;
+  max-width: 320px;
+  display: block;
+  margin: 0 auto;
+}
+
+.legend {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.8;
+  font-size: 0.85rem;
+}
+.legend .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: #22c55e;
+}
+
+/* Make the zones feel clickable */
+.bodymap-wrap :is(#zone-shoulder, #zone-shoulder-r, #zone-elbow, #zone-elbow-r, #zone-knee, #zone-knee-r, #zone-ankle, #zone-ankle-r, #zone-hip, #zone-hip-r, #zone-lowerBack) {
+  cursor: pointer;
+}
+
+/* Hover effect */
+.bodymap-wrap :is(#zone-shoulder, #zone-shoulder-r, #zone-elbow, #zone-elbow-r, #zone-knee, #zone-knee-r, #zone-ankle, #zone-ankle-r, #zone-hip, #zone-hip-r, #zone-lowerBack):hover {
+  fill: rgba(34,197,94,0.25);
+  stroke: rgba(34,197,94,0.9);
+  stroke-width: 2;
+}
+
+/* Selected highlight (we’ll set via a data attribute on wrapper) */
+.bodymap-wrap[data-selected="shoulder"] :is(#zone-shoulder, #zone-shoulder-r),
+.bodymap-wrap[data-selected="elbow"] :is(#zone-elbow, #zone-elbow-r),
+.bodymap-wrap[data-selected="knee"] :is(#zone-knee, #zone-knee-r),
+.bodymap-wrap[data-selected="ankle"] :is(#zone-ankle, #zone-ankle-r),
+.bodymap-wrap[data-selected="hip"] :is(#zone-hip, #zone-hip-r),
+.bodymap-wrap[data-selected="lowerBack"] #zone-lowerBack {
+  fill: rgba(34,197,94,0.35);
+  stroke: rgba(34,197,94,1);
+  stroke-width: 2.5;
+}
