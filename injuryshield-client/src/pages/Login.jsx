@@ -11,38 +11,60 @@ function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const userInfo = localStorage.getItem("userInfo");
-    if (userInfo) {
-      const parsed = JSON.parse(userInfo);
-      if (parsed.role === "coach") navigate("/coach");
+    const raw = localStorage.getItem("userInfo");
+    if (!raw) return;
+
+    try {
+      const parsed = JSON.parse(raw);
+      if (parsed?.role === "coach") navigate("/coach");
       else navigate("/dashboard");
+    } catch {
+      // corrupted storage, clear it
+      localStorage.removeItem("userInfo");
+      localStorage.removeItem("token");
     }
   }, [navigate]);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
+  e.preventDefault();
+  setLoading(true);
 
-    try {
-      const { data } = await API.post("/auth/login", {
-        email,
-        password
-      });
+  try {
+    const { data } = await API.post("/auth/login", { email, password });
 
-      localStorage.setItem("userInfo", JSON.stringify(data));
+    console.log("LOGIN RESPONSE:", data);
 
-      if (data.role === "coach") {
-        navigate("/coach");
-      } else {
-        navigate("/dashboard");
-      }
+    // Support both backend formats
+    const token = data?.token;
+    const user = data?.user || data;
 
-    } catch (error) {
-      alert(error.response?.data?.message || "Login failed");
-    } finally {
-      setLoading(false);
+    if (!token) {
+      throw new Error("Login response missing token");
     }
-  };
+
+    localStorage.setItem("token", token);
+
+    localStorage.setItem(
+      "userInfo",
+      JSON.stringify({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+      })
+    );
+
+    if (user.role === "coach") navigate("/coach");
+    else navigate("/dashboard");
+
+  } catch (error) {
+    console.log("Login error:", error);
+    alert(error.response?.data?.message || error.message || "Login failed");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className="auth-container">
@@ -74,4 +96,3 @@ function Login() {
 }
 
 export default Login;
-

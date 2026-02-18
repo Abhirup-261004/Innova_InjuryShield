@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import API from "../api/axios";
 import { connectSocket, disconnectSocket } from "../api/socket";
 import ChatList from "../components/chat/ChatList";
@@ -16,97 +16,126 @@ export default function ChatPage() {
 
   const [socket, setSocket] = useState(null);
 
-  useEffect(() => {
-    const s = connectSocket();
-    setSocket(s);
-    return () => disconnectSocket();
-  }, []);
-
   const me = useMemo(() => {
     const raw = localStorage.getItem("userInfo");
     return raw ? JSON.parse(raw) : null;
   }, []);
 
-  // Load contact list + existing conversations
+  // refs to avoid re-binding socket listeners
+  const activeUserIdRef = useRef(null);
+  const conversationIdRef = useRef(null);
+
+  useEffect(() => {
+    activeUserIdRef.current = activeUser?._id || null;
+    conversationIdRef.current = conversationId || null;
+  }, [activeUser?._id, conversationId]);
+
   const loadSidebar = async () => {
-    const [c1, c2] = await Promise.all([
-      API.get("/chat/contacts"),
-      API.get("/chat/conversations")
-    ]);
-    setContacts(c1.data || []);
-    setConversations(c2.data || []);
+    try {
+      const [c1, c2] = await Promise.all([
+        API.get("/chat/contacts"),
+        API.get("/chat/conversations"),
+      ]);
+      setContacts(c1.data || []);
+      setConversations(c2.data || []);
+    } catch (e) {
+      console.log("loadSidebar error:", e?.response?.data || e.message);
+    }
   };
 
   const openChatWith = async (user) => {
-    setActiveUser(user);
-    setMessages([]);
-    setConversationId(null);
+    try {
+      setActiveUser(user);
+      setMessages([]);
+      setConversationId(null);
 
-    const { data } = await API.get(`/chat/${user._id}/messages`);
-    setConversationId(data.conversationId);
-    setMessages(data.messages || []);
+      const { data } = await API.get(`/chat/${user._id}/messages`);
+      setConversationId(data.conversationId);
+      setMessages(data.messages || []);
+    } catch (e) {
+      console.log("openChatWith error:", e?.response?.data || e.message);
+    }
   };
 
-  // Socket: realtime new messages + seen updates
+  // ✅ Connect socket ONCE and attach listeners ONCE
   useEffect(() => {
     loadSidebar();
 
     const s = connectSocket();
-    if (!s) return;
+    setSocket(s);
 
-    s.on("message:new", (msg) => {
-      // only append to active chat if match
-      const otherId = activeUser?._id;
+    if (!s) return () => {};
+
+    const onMessageNew = (msg) => {
+      const otherId = activeUserIdRef.current;
+
       const relevant =
         (msg.sender === otherId && msg.receiver === me?._id) ||
         (msg.sender === me?._id && msg.receiver === otherId);
 
       if (relevant) {
         setMessages((prev) => [...prev, msg]);
-        setConversationId(msg.conversation || conversationId);
+
+        // If conversationId isn't set yet, set it
+        if (!conversationIdRef.current && msg.conversation) {
+          setConversationId(msg.conversation);
+        }
       }
 
-      // refresh conversation list ordering/last message
       loadSidebar();
-    });
+    };
 
-    s.on("message:seen:update", ({ conversationId: cid }) => {
-      if (cid && cid === conversationId) {
+    const onSeenUpdate = ({ conversationId: cid }) => {
+      if (cid && cid === conversationIdRef.current) {
         setMessages((prev) =>
           prev.map((m) =>
-            m.status !== "seen" && m.sender === me?._id ? { ...m, status: "seen" } : m
+            m.sender === me?._id && m.status !== "seen" ? { ...m, status: "seen" } : m
           )
         );
       }
-    });
+    };
 
-    s.on("presence:online", ({ userId }) => {
-        setOnlineSet((prev) => new Set(prev).add(userId));
-    });
+    const onOnline = ({ userId }) => {
+      setOnlineSet((prev) => new Set(prev).add(userId));
+    };
 
-    s.on("presence:offline", ({ userId }) => {
-        setOnlineSet((prev) => {
+    const onOffline = ({ userId }) => {
+      setOnlineSet((prev) => {
         const n = new Set(prev);
         n.delete(userId);
         return n;
-    });
-    });
+      });
+    };
 
-    s.on("typing:start", ({ from }) => setTypingFrom(from));
-    s.on("typing:stop", ({ from }) => {
-        setTypingFrom((cur) => (cur === from ? null : cur));
-    });
+    const onTypingStart = ({ from }) => setTypingFrom(from);
+    const onTypingStop = ({ from }) =>
+      setTypingFrom((cur) => (cur === from ? null : cur));
 
-    s.on("message:deleted", ({ messageId }) => {
-        setMessages((prev) => prev.filter((m) => m._id !== messageId));
-    });
+    const onDeleted = ({ messageId }) => {
+      setMessages((prev) => prev.filter((m) => m._id !== messageId));
+    };
 
+    s.on("message:new", onMessageNew);
+    s.on("message:seen:update", onSeenUpdate);
+    s.on("presence:online", onOnline);
+    s.on("presence:offline", onOffline);
+    s.on("typing:start", onTypingStart);
+    s.on("typing:stop", onTypingStop);
+    s.on("message:deleted", onDeleted);
 
     return () => {
+      s.off("message:new", onMessageNew);
+      s.off("message:seen:update", onSeenUpdate);
+      s.off("presence:online", onOnline);
+      s.off("presence:offline", onOffline);
+      s.off("typing:start", onTypingStart);
+      s.off("typing:stop", onTypingStop);
+      s.off("message:deleted", onDeleted);
+
       disconnectSocket();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeUser?._id, conversationId]);
+  }, []); // ✅ EMPTY deps
 
   return (
     <div className="wa-shell">
@@ -122,24 +151,26 @@ export default function ChatPage() {
         </div>
 
         <ChatList
-            conversations={conversations}
-            contacts={contacts}
-            activeUserId={activeUser?._id}
-            onSelectUser={openChatWith}
-            onlineSet={onlineSet}
+          conversations={conversations}
+          contacts={contacts}
+          activeUserId={activeUser?._id}
+          onSelectUser={openChatWith}
+          onlineSet={onlineSet}
         />
       </div>
 
       <div className="wa-main">
         <ChatWindow
+            socket={socket}
             me={me}
             activeUser={activeUser}
             conversationId={conversationId}
             messages={messages}
-            onNewLocalMessage={(m) => setMessages((prev) => [...prev, m])}
+            setMessages={setMessages}
             typing={typingFrom === activeUser?._id}
             online={onlineSet.has(activeUser?._id)}
         />
+
       </div>
     </div>
   );
