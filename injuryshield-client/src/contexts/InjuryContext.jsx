@@ -23,31 +23,25 @@ export function InjuryProvider({ children }) {
   };
 
   const fetchSummary = useCallback(async () => {
-    const token = getToken();
-    if (!token) return; // ✅ don't hit protected endpoints
+  try {
+    const { data } = await API.get("/analytics/summary");
+    setSummary(data);
 
-    try {
-      const config = {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      };
+    const trendRes = await API.get("/analytics/acwr-trend");
+    setAcwrTrend(trendRes.data);
 
-      const { data } = await API.get("/analytics/summary", config);
-      setSummary(data);
+    const workoutTrendRes = await API.get("/workouts/trend");
+    setWorkoutTrend(workoutTrendRes.data);
 
-      const trendRes = await API.get("/analytics/acwr-trend", config);
-      setAcwrTrend(trendRes.data);
+    const workoutsRes = await API.get("/workouts");
+    setWorkouts(workoutsRes.data?.workouts ?? workoutsRes.data ?? []);
+  } catch (error) {
+    // important: don’t keep dashboard stuck forever
+    setSummary({ weeklyLoad: 0, acwrData: { acuteLoad: 0, chronicLoad: 0, acwr: 0 }, riskScore: 0, overtraining: { isOvertraining: false, reasons: [] }});
+    console.log("Auth/API error:", error?.response?.data || error.message);
+  }
+}, []);
 
-      const workoutTrendRes = await API.get("/workouts/trend", config);
-      setWorkoutTrend(workoutTrendRes.data);
-
-      const workoutsRes = await API.get("/workouts", config);
-      setWorkouts(workoutsRes.data);
-    } catch (error) {
-      console.log("Not authenticated yet");
-    }
-  }, []);
 
   // ✅ Only fetch if logged in
   useEffect(() => {

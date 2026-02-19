@@ -110,12 +110,13 @@ const deleteWorkout = async (id) => {
 
       <div className="workouts-filters">
         <select value={type} onChange={(e) => setType(e.target.value)}>
-          <option value="">All Types</option>
-          <option value="Run">Run</option>
-          <option value="Gym">Gym</option>
-          <option value="Cycling">Cycling</option>
-          <option value="Yoga">Yoga</option>
-          <option value="Other">Other</option>
+            <option value="">All Types</option>
+            <option value="Strength (Upper)">Strength (Upper)</option>
+            <option value="Strength (Lower)">Strength (Lower)</option>
+            <option value="Hypertrophy">Hypertrophy</option>
+            <option value="HIIT">HIIT</option>
+            <option value="Cardio">Cardio</option>
+            <option value="Sport Practice">Sport Practice</option>
         </select>
 
         <input

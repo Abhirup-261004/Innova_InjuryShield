@@ -6,11 +6,11 @@ const BodyPartExposure = require("../models/BodyPartExposure");
 const data = [
   // Example in PDF (you can expand) :contentReference[oaicite:2]{index=2}
   {
-    sessionType: "Strength Upper",
+    sessionType: "Strength (Upper)",
     exposure: { shoulder: 0.8, knee: 0.1, lowerBack: 0.3, elbow: 0.4, hip: 0.1, ankle: 0.05 },
   },
   {
-    sessionType: "Strength Lower",
+    sessionType: "Strength (Lower)",
     exposure: { shoulder: 0.2, knee: 0.8, lowerBack: 0.6, hip: 0.6, ankle: 0.5, elbow: 0.05 },
   },
   {

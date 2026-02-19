@@ -10,32 +10,48 @@ export function computeACWR(workouts) {
       chronicLoad: 0,
       acuteAvg: 0,
       chronicAvg: 0,
-      acwr: 0
+      acwr: 0,
+      baselineDays: 0,
+      hasBaseline: false,
     };
   }
 
-  // Sort workouts by date ASC
   const sorted = [...workouts].sort((x, y) => new Date(x.date) - new Date(y.date));
+  const firstDate = new Date(sorted[0].date);
   const latestDate = new Date(sorted[sorted.length - 1].date);
 
-  let acuteLoad = 0;   // last 7 days sum
-  let chronicLoad = 0; // last 28 days sum
+  let acuteLoad = 0;
+  let chronicLoad = 0;
 
   for (const w of sorted) {
     const d = new Date(w.date);
     const diff = daysBetween(latestDate, d);
-
     const load = Number(w.load || 0);
 
     if (diff >= 0 && diff < 7) acuteLoad += load;
     if (diff >= 0 && diff < 28) chronicLoad += load;
   }
 
-  const acuteAvg = acuteLoad / 7;
-  const chronicAvg = chronicLoad / 28;
+  // Effective days since first workout (prevents forced “4” early)
+  const daysSinceFirst = daysBetween(latestDate, firstDate) + 1;
+  const acuteDays = Math.min(7, Math.max(1, daysSinceFirst));
+  const chronicDays = Math.min(28, Math.max(1, daysSinceFirst));
 
-  // Avoid divide by 0
+  const acuteAvg = acuteLoad / acuteDays;
+  const chronicAvg = chronicLoad / chronicDays;
+
   const acwr = chronicAvg > 0 ? Number((acuteAvg / chronicAvg).toFixed(2)) : 0;
 
-  return { acuteLoad, chronicLoad, acuteAvg, chronicAvg, acwr };
+  const hasBaseline = chronicDays >= 14; // you can tune this
+
+  return {
+    acuteLoad,
+    chronicLoad,
+    acuteAvg: Number(acuteAvg.toFixed(2)),
+    chronicAvg: Number(chronicAvg.toFixed(2)),
+    acwr,
+    baselineDays: chronicDays,
+    hasBaseline,
+  };
 }
+

@@ -4,11 +4,24 @@ const API = axios.create({
   baseURL: import.meta.env.VITE_API_URL || "http://localhost:8000/api",
 });
 
-// 🔥 Attach token automatically
 API.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token");
+  // Support BOTH storage styles
+  const direct = localStorage.getItem("token");
+
+  let token = direct;
+  if (!token) {
+    const stored = localStorage.getItem("userInfo");
+    if (stored) {
+      try {
+        token = JSON.parse(stored)?.token || null;
+      } catch {
+        token = null;
+      }
+    }
+  }
 
   if (token) {
+    config.headers = config.headers || {};
     config.headers.Authorization = `Bearer ${token}`;
   }
 

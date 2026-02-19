@@ -29,9 +29,10 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route path="/checkin" element={<DailyCheckin />} />
-        <Route path="/workouts/new" element={<AddWorkout />} />
-        <Route path="/workouts" element={<Workouts />} />
+        <Route path="/checkin" element={<ProtectedRoute><DailyCheckin /></ProtectedRoute>} />
+        <Route path="/workouts/new" element={<ProtectedRoute><AddWorkout /></ProtectedRoute>} />
+        <Route path="/workouts" element={<ProtectedRoute><Workouts /></ProtectedRoute>} />
+
         <Route
           path="/plan-builder"
           element={
