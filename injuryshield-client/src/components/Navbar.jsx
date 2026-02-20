@@ -39,7 +39,7 @@ function Navbar() {
             <Link to="/plan-builder">Plan Builder</Link>
             <Link to="/chat">Chat</Link>
             <Link to="/form-analysis">Form Analysis</Link>
-
+            <Link to="/posture-analysis">Posture Analysis</Link>
             {/* Coach Dashboard Link */}
             {userInfo.role === "coach" && (
               <Link to="/coach">Coach Dashboard</Link>

@@ -13,6 +13,7 @@ import CoachDashboard from "./pages/CoachDashboard";
 import InjuryRadar from "./pages/InjuryRadar";
 import ChatPage from "./pages/ChatPage";
 import FormAnalysis from "./pages/FormAnalysis";
+import PostureAnalysis from "./pages/PostureAnalysis";
 
 function App() {
   return (
@@ -64,6 +65,14 @@ function App() {
           element={
             <ProtectedRoute>
               <FormAnalysis />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/posture-analysis"
+          element={
+            <ProtectedRoute>
+              <PostureAnalysis />
             </ProtectedRoute>
           }
         />

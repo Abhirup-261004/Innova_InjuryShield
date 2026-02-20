@@ -1,0 +1,67 @@
+.pa-container {
+  padding: 20px;
+  color: white;
+}
+
+.pa-upload {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.pa-upload input {
+  padding: 8px;
+}
+
+.pa-upload button {
+  padding: 8px 14px;
+  background: #22c55e;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.pa-upload button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.pa-risk-card {
+  border: 2px solid;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  background: #111827;
+}
+
+.pa-risk-card ul {
+  margin-top: 10px;
+  padding-left: 18px;
+}
+
+.pa-chart {
+  margin-bottom: 30px;
+  background: #0f172a;
+  padding: 16px;
+  border-radius: 12px;
+}
+
+.pa-history {
+  margin-top: 20px;
+}
+
+.pa-history-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid #1f2937;
+}
+
+.pa-muted {
+  opacity: 0.8;
+  font-size: 14px;
+}
