@@ -128,12 +128,13 @@ function computeMetrics(keypoints, scoreThreshold = 0.35) {
   // Trunk lean proxy
   const vx = shoulderMid.x - pelvisMid.x;
   const vy = shoulderMid.y - pelvisMid.y;
-
   const trunkLeanDeg = Math.abs((Math.atan2(vx, -vy) * 180) / Math.PI);
 
   // Asymmetry
   const kneeAngleDiff =
-    leftKneeAngle != null && rightKneeAngle != null ? Math.abs(leftKneeAngle - rightKneeAngle) : null;
+    leftKneeAngle != null && rightKneeAngle != null
+      ? Math.abs(leftKneeAngle - rightKneeAngle)
+      : null;
 
   const valgusDiff = Math.abs(leftValgus - rightValgus);
 
@@ -160,21 +161,45 @@ function classifyRisk(m) {
 
   // Knee valgus thresholds
   if (valgusMax > 0.16)
-    flags.push({ key: "knee_valgus", level: "HIGH", note: "Knee collapse inward detected (high)." });
+    flags.push({
+      key: "knee_valgus",
+      level: "HIGH",
+      note: "Knee collapse inward detected (high).",
+    });
   else if (valgusMax > 0.1)
-    flags.push({ key: "knee_valgus", level: "MOD", note: "Mild–moderate knee valgus detected." });
+    flags.push({
+      key: "knee_valgus",
+      level: "MOD",
+      note: "Mild–moderate knee valgus detected.",
+    });
 
   // Trunk lean thresholds
   if (trunk > 28)
-    flags.push({ key: "back_rounding", level: "HIGH", note: "Excess forward trunk lean/rounding proxy detected." });
+    flags.push({
+      key: "back_rounding",
+      level: "HIGH",
+      note: "Excess forward trunk lean/rounding proxy detected.",
+    });
   else if (trunk > 18)
-    flags.push({ key: "back_rounding", level: "MOD", note: "Moderate forward trunk lean/rounding proxy detected." });
+    flags.push({
+      key: "back_rounding",
+      level: "MOD",
+      note: "Moderate forward trunk lean/rounding proxy detected.",
+    });
 
   // Asymmetry thresholds
   if (asym > 18 || m.valgusDiff > 0.08)
-    flags.push({ key: "asymmetry", level: "HIGH", note: "Left–right imbalance detected (high)." });
+    flags.push({
+      key: "asymmetry",
+      level: "HIGH",
+      note: "Left–right imbalance detected (high).",
+    });
   else if (asym > 12 || m.valgusDiff > 0.05)
-    flags.push({ key: "asymmetry", level: "MOD", note: "Left–right imbalance detected (moderate)." });
+    flags.push({
+      key: "asymmetry",
+      level: "MOD",
+      note: "Left–right imbalance detected (moderate).",
+    });
 
   // Overall score
   let score = 10;
@@ -196,6 +221,7 @@ export default function FormAnalysis() {
   const [metrics, setMetrics] = useState(null);
   const [risk, setRisk] = useState(null);
 
+  // smoothed values for stable UI
   const smoothRef = useRef({
     trunkLeanDeg: null,
     leftValgus: null,
@@ -264,7 +290,10 @@ export default function FormAnalysis() {
         ctx.drawImage(video, 0, 0, w, h);
 
         if (!video.paused && !video.ended) {
-          const poses = await detector.estimatePoses(video, { maxPoses: 1, flipHorizontal: false });
+          const poses = await detector.estimatePoses(video, {
+            maxPoses: 1,
+            flipHorizontal: false,
+          });
           const pose = poses?.[0];
 
           if (pose?.keypoints?.length) {
@@ -299,7 +328,11 @@ export default function FormAnalysis() {
               ctx.fillStyle = "rgba(255,255,255,0.9)";
               ctx.font = "14px Arial";
               ctx.fillText(`Trunk lean: ${sm.trunkLeanDeg?.toFixed(1)}°`, 14, 50);
-              ctx.fillText(`Valgus L/R: ${sm.leftValgus?.toFixed(2)} / ${sm.rightValgus?.toFixed(2)}`, 14, 70);
+              ctx.fillText(
+                `Valgus L/R: ${sm.leftValgus?.toFixed(2)} / ${sm.rightValgus?.toFixed(2)}`,
+                14,
+                70
+              );
               ctx.fillText(
                 `Knee angle L/R: ${sm.leftKneeAngle?.toFixed(0)}° / ${sm.rightKneeAngle?.toFixed(0)}°`,
                 14,
@@ -357,7 +390,8 @@ export default function FormAnalysis() {
         <div>
           <h2>AI Form Analysis</h2>
           <p className="fa-sub">
-            Upload a squat or running video. We detect knee valgus, trunk collapse proxy, and asymmetry using TFJS Pose Detection.
+            Upload a squat or running video. We detect knee valgus, trunk collapse proxy, and
+            asymmetry using TFJS Pose Detection.
           </p>
         </div>
 
@@ -390,7 +424,9 @@ export default function FormAnalysis() {
             <canvas ref={canvasRef} className="fa-canvas" />
           </div>
 
-          <div className="fa-hint">Tip: Use a 5–15s clip, side or front view. Better lighting = better landmarks.</div>
+          <div className="fa-hint">
+            Tip: Use a 5–15s clip, side or front view. Better lighting = better landmarks.
+          </div>
         </div>
 
         <div className="fa-panel">

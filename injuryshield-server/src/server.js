@@ -8,6 +8,7 @@ const checkinRoutes = require("./routes/checkinRoutes");
 const analyticsRoutes = require("./routes/analyticsRoutes");
 const planRoutes = require("./routes/planRoutes");
 const injuryradarRoutes = require("./routes/injuryRadarRoutes");
+const formAnalysisRoutes = require("./routes/formAnalysisRoutes");
 
 const http = require("http");
 const initSocket = require("./socket"); // points to src/socket/index.js
@@ -89,6 +90,7 @@ app.use("/api/analytics", analyticsRoutes);
 app.use("/api/plans", planRoutes);
 app.use("/api/injury-radar", injuryradarRoutes)
 app.use("/api/chat", chatRoutes);
+app.use("/api/form-analysis", formAnalysisRoutes);
 
 
 // Start Server
