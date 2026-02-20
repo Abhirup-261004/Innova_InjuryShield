@@ -38,6 +38,7 @@ function Navbar() {
             <Link to="/injury-radar">Injury Radar</Link>
             <Link to="/plan-builder">Plan Builder</Link>
             <Link to="/chat">Chat</Link>
+            <Link to="/form-analysis">Form Analysis</Link>
 
             {/* Coach Dashboard Link */}
             {userInfo.role === "coach" && (

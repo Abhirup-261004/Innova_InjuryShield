@@ -12,6 +12,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import CoachDashboard from "./pages/CoachDashboard";
 import InjuryRadar from "./pages/InjuryRadar";
 import ChatPage from "./pages/ChatPage";
+import FormAnalysis from "./pages/FormAnalysis";
 
 function App() {
   return (
@@ -55,6 +56,14 @@ function App() {
           element={
             <ProtectedRoute allowedRoles={["coach"]}>
               <CoachDashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/form-analysis"
+          element={
+            <ProtectedRoute>
+              <FormAnalysis />
             </ProtectedRoute>
           }
         />
