@@ -1,0 +1,67 @@
+.edit-coach-page {
+  min-height: 100vh;
+  padding: 24px;
+  background: radial-gradient(circle at top, #0b1220, #050a14);
+  color: #e6edf6;
+}
+
+.edit-coach-card {
+  max-width: 700px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 24px;
+}
+
+.edit-coach-card h2 {
+  margin-bottom: 8px;
+}
+
+.edit-coach-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.edit-coach-form label {
+  font-weight: 600;
+  color: #dbe4ee;
+}
+
+.edit-coach-form input,
+.edit-coach-form textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #374151;
+  background: #0f172a;
+  color: white;
+  outline: none;
+}
+
+.edit-coach-form input:focus,
+.edit-coach-form textarea:focus {
+  border-color: #22c55e;
+}
+
+.edit-coach-form button {
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background: #22c55e;
+  color: #081018;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.edit-coach-form button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.edit-coach-loading {
+  padding: 24px;
+  color: white;
+}

@@ -14,6 +14,10 @@ import InjuryRadar from "./pages/InjuryRadar";
 import ChatPage from "./pages/ChatPage";
 import FormAnalysis from "./pages/FormAnalysis";
 import PostureAnalysis from "./pages/PostureAnalysis";
+import ChooseCoach from "./pages/ChooseCoach";
+import RateCoach from "./pages/RateCoach";
+import CoachProfile from "./pages/CoachProfile";
+import EditCoachProfile from "./pages/EditCoachProfile";
 
 function App() {
   return (
@@ -73,6 +77,38 @@ function App() {
           element={
             <ProtectedRoute>
               <PostureAnalysis />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/choose-coach"
+          element={
+            <ProtectedRoute>
+              <ChooseCoach />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/rate-coach"
+          element={
+            <ProtectedRoute>
+              <RateCoach />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/coach-profile/:coachId"
+          element={
+            <ProtectedRoute>
+              <CoachProfile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/edit-coach-profile"
+          element={
+            <ProtectedRoute allowedRoles={["coach"]}>
+              <EditCoachProfile />
             </ProtectedRoute>
           }
         />

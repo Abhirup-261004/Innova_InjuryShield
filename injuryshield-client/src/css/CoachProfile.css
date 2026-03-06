@@ -1,0 +1,63 @@
+.coach-profile-page {
+  min-height: 100vh;
+  padding: 24px;
+  background: radial-gradient(circle at top, #0b1220, #050a14);
+  color: #e6edf6;
+}
+
+.coach-profile-card,
+.coach-profile-reviews {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.coach-profile-top {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.coach-profile-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.coach-profile-stars {
+  font-size: 24px;
+  color: #facc15;
+  margin-bottom: 12px;
+}
+
+.coach-profile-info p {
+  margin: 10px 0;
+  color: #d1d5db;
+}
+
+.coach-profile-reviews h3 {
+  margin-bottom: 14px;
+}
+
+.coach-profile-review-card {
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.coach-profile-review-card:last-child {
+  border-bottom: none;
+}
+
+.coach-profile-loading {
+  padding: 24px;
+  color: white;
+}

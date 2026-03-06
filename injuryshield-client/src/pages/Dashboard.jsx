@@ -5,8 +5,27 @@ import { useInjury } from "../contexts/InjuryContext";
 import AcwrTrendChart from "../components/AcwrTrendChart";
 import LoadChart from "../components/LoadChart";
 import AcwrEwmaChart from "../components/AcwrEwmaChart";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import API from "../api/axios";
 
 function Dashboard() {
+
+  const [myCoachData, setMyCoachData] = useState(null);
+
+  useEffect(() => {
+    const fetchCoach = async () => {
+      try {
+        const { data } = await API.get("/coaches/my-coach");
+        setMyCoachData(data || null);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchCoach();
+  }, []);
+
   const { summary, acwrTrend, workoutTrend, refresh } = useInjury();
 
   // If API failed or not loaded yet
@@ -159,6 +178,42 @@ function Dashboard() {
         <div className="card">
           <h3>Smart Recommendation</h3>
           <p>{suggestion}</p>
+        </div>
+
+        <div className="card">
+          <h3>Assigned Coach</h3>
+
+          {!myCoachData?.coach ? (
+            <>
+              <p>You have not selected a coach yet.</p>
+              <Link to="/choose-coach" className="dashboard-link-btn">
+                Choose Coach
+              </Link>
+            </>
+          ) : (
+            <>
+              <p>
+                <strong>{myCoachData.coach.name}</strong>
+              </p>
+              <p>{myCoachData.coach.email}</p>
+              <p>
+                Status:{" "}
+                <span className={`coach-status-pill ${myCoachData.coachRequestStatus}`}>
+                  {myCoachData.coachRequestStatus?.toUpperCase()}
+                </span>
+              </p>
+              <p>
+                Rating: {myCoachData.coach.avgRating || 0} ⭐ (
+                {myCoachData.coach.ratingsCount || 0} reviews)
+              </p>
+              <Link
+                to={`/coach-profile/${myCoachData.coach._id}`}
+                className="dashboard-link-btn"
+              >
+                View Coach Profile
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </div>

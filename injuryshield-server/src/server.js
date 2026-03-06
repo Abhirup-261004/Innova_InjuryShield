@@ -9,6 +9,7 @@ const analyticsRoutes = require("./routes/analyticsRoutes");
 const planRoutes = require("./routes/planRoutes");
 const injuryradarRoutes = require("./routes/injuryRadarRoutes");
 const formAnalysisRoutes = require("./routes/formAnalysisRoutes");
+const coachRoutes = require("./routes/coachRoutes");
 
 const http = require("http");
 const initSocket = require("./socket"); // points to src/socket/index.js
@@ -91,7 +92,7 @@ app.use("/api/plans", planRoutes);
 app.use("/api/injury-radar", injuryradarRoutes)
 app.use("/api/chat", chatRoutes);
 app.use("/api/form-analysis", formAnalysisRoutes);
-
+app.use("/api/coaches", coachRoutes);
 
 // Start Server
 const PORT = process.env.PORT || 8000;

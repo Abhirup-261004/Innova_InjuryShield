@@ -1,0 +1,63 @@
+.rate-coach-page {
+  min-height: 100vh;
+  padding: 24px;
+  color: #e6edf6;
+  background: radial-gradient(circle at top, #0b1220, #050a14);
+}
+
+.rate-coach-card,
+.coach-reviews-box {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.rate-coach-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.rate-coach-form select,
+.rate-coach-form textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #374151;
+  background: #0f172a;
+  color: white;
+}
+
+.rate-coach-form button {
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background: #22c55e;
+  color: #081018;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.review-card {
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.star-row {
+  display: flex;
+  gap: 10px;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.star {
+  color: #4b5563;
+  transition: 0.2s ease;
+}
+
+.star.active {
+  color: #facc15;
+}

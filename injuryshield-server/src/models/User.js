@@ -15,20 +15,58 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true
     },
-    age: Number,
-    weight: Number,
+    role: {
+      type: String,
+      enum: ["user", "coach"],
+      default: "user"
+    },
+
+    // athlete -> selected/requested coach
+    coachAssigned: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      default: null
+    },
+
+    coachRequestStatus: {
+      type: String,
+      enum: ["none", "pending", "approved", "rejected"],
+      default: "none"
+    },
+
+    avgRating: {
+      type: Number,
+      default: 0
+    },
+
+    ratingsCount: {
+      type: Number,
+      default: 0
+    },
+
+    coachBio: {
+      type: String,
+      default: ""
+    },
+
+    specialization: {
+      type: String,
+      default: ""
+    },
+
+    experienceYears: {
+      type: Number,
+      default: 0
+    },
+
     goal: {
       type: String,
-      enum: ["Fat Loss", "Muscle Gain", "Strength", "Endurance"]
+      default: ""
     },
+
     experienceLevel: {
       type: String,
-      enum: ["Beginner", "Intermediate", "Advanced"]
-    },
-    role: {
-        type: String,
-        enum: ["user", "coach"],
-        default: "user"
+      default: ""
     }
   },
   { timestamps: true }
