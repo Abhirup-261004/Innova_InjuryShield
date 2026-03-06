@@ -40,8 +40,15 @@ function Navbar() {
             <Link to="/chat">Chat</Link>
             <Link to="/form-analysis">Form Analysis</Link>
             <Link to="/posture-analysis">Posture Analysis</Link>
-            <Link to="/choose-coach">Choose Coach</Link>
-            <Link to="/rate-coach">Rate Coach</Link>
+
+            {/* Coach Choosing and rating Link */}
+            {userInfo.role === "user" && (
+              <>
+                <Link to="/choose-coach">Choose Coach</Link>
+                <Link to="/rate-coach">Rate Coach</Link>
+              </>
+            )}
+            
             {/* Coach Dashboard Link */}
             {userInfo.role === "coach" && (
               <>
