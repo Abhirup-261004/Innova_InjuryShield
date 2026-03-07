@@ -164,14 +164,14 @@ JWT_SECRET=your_secret_key
 ```bash
 # Start the backend server
 cd injuryshield-server
-npm start
+npm run dev
 
 # In a new terminal, start the frontend
 cd injuryshield-client
-npm start
+npm run dev
 ```
 
-The app will be available at `http://localhost:3000`.
+The app will be available at `http://localhost:5173`.
 
 ---
 
