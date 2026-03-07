@@ -18,6 +18,10 @@ import ChooseCoach from "./pages/ChooseCoach";
 import RateCoach from "./pages/RateCoach";
 import CoachProfile from "./pages/CoachProfile";
 import EditCoachProfile from "./pages/EditCoachProfile";
+import AthleteReport from "./pages/AthleteReport";
+import ReportHistory from "./pages/ReportHistory";
+import ReportDetails from "./pages/ReportDetails";
+import CoachAthleteReports from "./pages/CoachAthleteReports";
 
 function App() {
   return (
@@ -109,6 +113,39 @@ function App() {
           element={
             <ProtectedRoute allowedRoles={["coach"]}>
               <EditCoachProfile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/athlete-report"
+          element={
+            <ProtectedRoute>
+              <AthleteReport />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/report-history"
+          element={
+            <ProtectedRoute>
+              <ReportHistory />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/report-details/:reportId"
+          element={
+            <ProtectedRoute>
+              <ReportDetails />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/coach-athlete-reports/:athleteId"
+          element={
+            <ProtectedRoute allowedRoles={["coach"]}>
+              <CoachAthleteReports />
             </ProtectedRoute>
           }
         />

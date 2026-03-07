@@ -1,6 +1,6 @@
+const dotenv = require("dotenv");
 const express = require("express");
 const cors = require("cors");
-const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
 const workoutRoutes = require("./routes/workoutRoutes");
@@ -10,6 +10,7 @@ const planRoutes = require("./routes/planRoutes");
 const injuryradarRoutes = require("./routes/injuryRadarRoutes");
 const formAnalysisRoutes = require("./routes/formAnalysisRoutes");
 const coachRoutes = require("./routes/coachRoutes");
+const geminiRoutes = require("./routes/geminiRoutes");
 
 const http = require("http");
 const initSocket = require("./socket"); // points to src/socket/index.js
@@ -93,6 +94,7 @@ app.use("/api/injury-radar", injuryradarRoutes)
 app.use("/api/chat", chatRoutes);
 app.use("/api/form-analysis", formAnalysisRoutes);
 app.use("/api/coaches", coachRoutes);
+app.use("/api/gemini",geminiRoutes);
 
 // Start Server
 const PORT = process.env.PORT || 8000;

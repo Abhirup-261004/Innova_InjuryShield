@@ -96,3 +96,9 @@
   background: #ef4444;
   color: white;
 }
+
+.coach-link-btn {
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+}

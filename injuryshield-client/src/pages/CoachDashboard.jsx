@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import API from "../api/axios";
 import "../css/CoachDashboard.css";
 
@@ -8,6 +9,19 @@ function CoachDashboard() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [expandedUserId, setExpandedUserId] = useState("");
+  const [athleteReports, setAthleteReports] = useState({});
+
+  const fetchAthleteReports = async (athleteId) => {
+  try {
+    const { data } = await API.get(`/gemini/coach-reports/${athleteId}`);
+    setAthleteReports((prev) => ({
+      ...prev,
+      [athleteId]: data || []
+    }));
+  } catch (err) {
+    console.error(err);
+  }
+};
 
   const fetchAll = async () => {
     try {
@@ -33,7 +47,15 @@ function CoachDashboard() {
   }, []);
 
   const toggleHistory = (userId) => {
-    setExpandedUserId((prev) => (prev === userId ? "" : userId));
+    setExpandedUserId((prev) => {
+      const next = prev === userId ? "" : userId;
+
+      if (next === userId) {
+        fetchAthleteReports(userId);
+      }
+
+      return next;
+    });
   };
 
   const approveRequest = async (userId) => {
@@ -146,6 +168,40 @@ function CoachDashboard() {
                           <p>RPE: {w.rpe}</p>
                           <p>Load: {w.load}</p>
                           <p>Date: {new Date(w.date).toLocaleDateString()}</p>
+                        </div>
+                      ))
+                    )}
+                    <Link
+                      to={`/coach-athlete-reports/${user._id}`}
+                      className="history-btn coach-link-btn"
+                    >
+                      View AI Reports
+                    </Link>
+                    <h4>AI Reports</h4>
+
+                    {!athleteReports[user._id] || athleteReports[user._id].length === 0 ? (
+                      <p>No AI reports generated yet.</p>
+                    ) : (
+                      athleteReports[user._id].map((reportItem) => (
+                        <div key={reportItem._id} className="workout-history-item">
+                          <p>
+                            <strong>Risk Level:</strong>{" "}
+                            {reportItem.report?.riskLevel || "Unknown"}
+                          </p>
+
+                          <p>
+                            <strong>Summary:</strong> {reportItem.report?.summary}
+                          </p>
+
+                          <p>
+                            <strong>Training Recommendation:</strong>{" "}
+                            {reportItem.report?.trainingRecommendation}
+                          </p>
+
+                          <p>
+                            <strong>Date:</strong>{" "}
+                            {new Date(reportItem.createdAt).toLocaleString()}
+                          </p>
                         </div>
                       ))
                     )}

@@ -46,6 +46,8 @@ function Navbar() {
               <>
                 <Link to="/choose-coach">Choose Coach</Link>
                 <Link to="/rate-coach">Rate Coach</Link>
+                <Link to="/athlete-report">AI Report</Link>
+                <Link to="/report-history">Report History</Link>
               </>
             )}
             

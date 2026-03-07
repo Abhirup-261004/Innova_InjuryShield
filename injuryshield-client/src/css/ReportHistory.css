@@ -1,0 +1,71 @@
+.report-history-page {
+  min-height: 100vh;
+  padding: 24px;
+  background: radial-gradient(circle at top, #0b1220, #050a14);
+  color: #e6edf6;
+}
+
+.report-history-page h2 {
+  margin-bottom: 24px;
+  font-size: 32px;
+}
+
+.report-history-list {
+  display: grid;
+  gap: 16px;
+}
+
+.report-history-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 20px;
+}
+
+.report-history-card p {
+  margin: 10px 0;
+  color: #d1d5db;
+}
+
+.history-risk-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.history-risk-badge.low {
+  background: rgba(34, 197, 94, 0.15);
+  color: #22c55e;
+}
+
+.history-risk-badge.moderate {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+}
+
+.history-risk-badge.high {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+}
+
+.report-history-loading {
+  padding: 24px;
+  color: white;
+}
+
+.report-history-actions {
+  margin-top: 14px;
+}
+
+.report-history-actions button {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 10px;
+  background: #22c55e;
+  color: #081018;
+  font-weight: 700;
+  cursor: pointer;
+}
