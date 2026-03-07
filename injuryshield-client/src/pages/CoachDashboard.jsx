@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import API from "../api/axios";
+import { Link } from "react-router-dom";
 import CoachInsightCard from "../components/CoachInsightCard";
 import "../css/CoachDashboard.css";
 
@@ -211,6 +212,12 @@ function CoachDashboard() {
                       ? "Generating AI Insight..."
                       : "Generate AI Insight"}
                   </button>
+                  <Link
+                    to={`/live-session/new?athleteId=${user._id}`}
+                    className="history-btn coach-link-btn"
+                  >
+                    Start Live Session
+                  </Link>
                 </div>
 
                 {expandedUserId === user._id && (

@@ -13,6 +13,7 @@ const coachRoutes = require("./routes/coachRoutes");
 const geminiRoutes = require("./routes/geminiRoutes");
 const chatbotRoutes = require("./routes/chatbotRoutes");
 const coachAiRoutes = require("./routes/coachAiRoutes");
+const videoSessionRoutes = require("./routes/videoSessionRoutes");
 
 const http = require("http");
 const initSocket = require("./socket"); // points to src/socket/index.js
@@ -99,6 +100,7 @@ app.use("/api/coaches", coachRoutes);
 app.use("/api/gemini",geminiRoutes);
 app.use("/api/chatbot", chatbotRoutes);
 app.use("/api/coach-ai", coachAiRoutes);
+app.use("/api/video-sessions", videoSessionRoutes);
 
 // Start Server
 const PORT = process.env.PORT || 8000;

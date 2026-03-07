@@ -40,6 +40,7 @@ function Navbar() {
             <Link to="/chat">Chat</Link>
             <Link to="/form-analysis">Form Analysis</Link>
             <Link to="/posture-analysis">Posture Analysis</Link>
+            <Link to="/video-sessions">Live Sessions</Link>
 
             {/* Coach Choosing and rating Link */}
             {userInfo.role === "user" && (

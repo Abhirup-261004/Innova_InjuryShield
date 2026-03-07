@@ -126,3 +126,9 @@
   opacity: 0.7;
   cursor: not-allowed;
 }
+
+.coach-link-btn {
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+}

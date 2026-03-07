@@ -23,6 +23,9 @@ import ReportHistory from "./pages/ReportHistory";
 import ReportDetails from "./pages/ReportDetails";
 import CoachAthleteReports from "./pages/CoachAthleteReports";
 import ChatbotWidget from "./components/ChatbotWidget";
+import LiveSessionLobby from "./pages/LiveSessionLobby";
+import LiveSessionRoom from "./pages/LiveSessionRoom";
+import VideoSessions from "./pages/VideoSessions";
 
 function App() {
   return (
@@ -147,6 +150,30 @@ function App() {
           element={
             <ProtectedRoute allowedRoles={["coach"]}>
               <CoachAthleteReports />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/video-sessions"
+          element={
+            <ProtectedRoute>
+              <VideoSessions />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/live-session/new"
+          element={
+            <ProtectedRoute>
+              <LiveSessionLobby />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/live-session/:sessionId"
+          element={
+            <ProtectedRoute>
+              <LiveSessionRoom />
             </ProtectedRoute>
           }
         />

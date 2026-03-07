@@ -212,6 +212,9 @@ function Dashboard() {
               >
                 View Coach Profile
               </Link>
+              <Link to={`/live-session/new?coachId=${myCoachData.coach._id}`} className="dashboard-link-btn">
+                Start Live Session
+              </Link>
             </>
           )}
         </div>
