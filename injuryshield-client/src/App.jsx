@@ -22,6 +22,7 @@ import AthleteReport from "./pages/AthleteReport";
 import ReportHistory from "./pages/ReportHistory";
 import ReportDetails from "./pages/ReportDetails";
 import CoachAthleteReports from "./pages/CoachAthleteReports";
+import ChatbotWidget from "./components/ChatbotWidget";
 
 function App() {
   return (
@@ -151,6 +152,7 @@ function App() {
         />
         <Route path="/chat" element={<ProtectedRoute><ChatPage /></ProtectedRoute>} />
       </Routes>
+      <ChatbotWidget />
     </>
   );
 }
