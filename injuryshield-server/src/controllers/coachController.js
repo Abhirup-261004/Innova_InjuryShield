@@ -33,12 +33,8 @@ exports.getAllCoaches = async (req, res) => {
 
 exports.assignCoach = async (req, res) => {
   try {
-    const athleteId = req.user._id;
+    const userId = req.user._id;
     const { coachId } = req.body;
-
-    if (req.user.role !== "user") {
-      return res.status(403).json({ message: "Only users can select a coach" });
-    }
 
     if (!coachId) {
       return res.status(400).json({ message: "coachId is required" });
@@ -49,28 +45,18 @@ exports.assignCoach = async (req, res) => {
       return res.status(404).json({ message: "Coach not found" });
     }
 
-    const athlete = await User.findById(athleteId);
-    if (!athlete) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
-    athlete.coachAssigned = coachId;
-    athlete.coachRequestStatus = "pending";
-    await athlete.save();
-
-    const updatedUser = await User.findById(athleteId)
-      .populate(
-        "coachAssigned",
-        "name email avgRating ratingsCount coachBio specialization experienceYears"
-      )
-      .select("-password");
+    const user = await User.findById(userId);
+    user.coachAssigned = coachId;
+    user.coachRequestStatus = "pending";
+    await user.save();
 
     res.json({
       message: "Coach request sent successfully",
-      user: updatedUser,
+      coachAssigned: coachId,
       coachRequestStatus: "pending"
     });
   } catch (error) {
+    console.error("assignCoach error:", error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -167,10 +153,11 @@ exports.getPendingRequests = async (req, res) => {
       role: "user",
       coachAssigned: req.user._id,
       coachRequestStatus: "pending"
-    }).select("name email goal experienceLevel createdAt");
+    }).select("name email goal experienceLevel");
 
     res.json(requests);
   } catch (error) {
+    console.error("getPendingRequests error:", error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -182,10 +169,6 @@ exports.approveRequest = async (req, res) => {
     }
 
     const { userId } = req.body;
-
-    if (!userId) {
-      return res.status(400).json({ message: "userId is required" });
-    }
 
     const trainee = await User.findOne({
       _id: userId,
@@ -203,6 +186,7 @@ exports.approveRequest = async (req, res) => {
 
     res.json({ message: "Trainee request approved" });
   } catch (error) {
+    console.error("approveRequest error:", error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -214,10 +198,6 @@ exports.rejectRequest = async (req, res) => {
     }
 
     const { userId } = req.body;
-
-    if (!userId) {
-      return res.status(400).json({ message: "userId is required" });
-    }
 
     const trainee = await User.findOne({
       _id: userId,
@@ -236,6 +216,7 @@ exports.rejectRequest = async (req, res) => {
 
     res.json({ message: "Trainee request rejected" });
   } catch (error) {
+    console.error("rejectRequest error:", error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -282,79 +263,68 @@ exports.getCoachTraineesDashboard = async (req, res) => {
 
     const coachId = req.user._id;
 
-    const athletes = await User.find({
-      coachAssigned: coachId,
+    const trainees = await User.find({
       role: "user",
+      coachAssigned: coachId,
       coachRequestStatus: "approved"
-    }).select("name email goal experienceLevel createdAt");
+    }).select("name email goal experienceLevel");
 
-    const athleteIds = athletes.map((a) => a._id);
+    const traineeIds = trainees.map((u) => u._id);
 
-    const workouts = await Workout.find({ user: { $in: athleteIds } }).sort({
-      date: -1
-    });
+    const workouts = await Workout.find({
+      user: { $in: traineeIds }
+    }).sort({ date: -1 });
 
-    const athleteSummaries = athletes.map((athlete) => {
-      const athleteWorkouts = workouts.filter(
-        (w) => String(w.user) === String(athlete._id)
+    const response = trainees.map((trainee) => {
+      const traineeWorkouts = workouts.filter(
+        (w) => String(w.user) === String(trainee._id)
       );
 
-      const totalLoad = athleteWorkouts.reduce(
+      const totalWorkouts = traineeWorkouts.length;
+      const totalLoad = traineeWorkouts.reduce(
         (sum, w) => sum + (w.load || 0),
         0
       );
 
-      const totalDuration = athleteWorkouts.reduce(
-        (sum, w) => sum + (w.duration || 0),
-        0
-      );
-
       const avgRpe =
-        athleteWorkouts.length === 0
+        totalWorkouts === 0
           ? 0
-          : Number(
-              (
-                athleteWorkouts.reduce((sum, w) => sum + (w.rpe || 0), 0) /
-                athleteWorkouts.length
-              ).toFixed(1)
-            );
+          : traineeWorkouts.reduce((sum, w) => sum + (w.rpe || 0), 0) /
+            totalWorkouts;
 
       return {
-        _id: athlete._id,
-        name: athlete.name,
-        email: athlete.email,
-        goal: athlete.goal,
-        experienceLevel: athlete.experienceLevel,
-        workoutsCount: athleteWorkouts.length,
-        totalWorkouts: athleteWorkouts.length,
+        _id: trainee._id,
+        name: trainee.name,
+        email: trainee.email,
+        goal: trainee.goal,
+        experienceLevel: trainee.experienceLevel,
+        totalWorkouts,
         totalLoad,
-        totalDuration,
-        avgRpe,
-        latestWorkout: athleteWorkouts[0] || null,
-        workoutHistory: athleteWorkouts,
-        recentWorkouts: athleteWorkouts.slice(0, 5)
+        avgRpe: Number(avgRpe.toFixed(1)),
+        latestWorkout:
+          traineeWorkouts.length > 0
+            ? {
+                type: traineeWorkouts[0].type,
+                duration: traineeWorkouts[0].duration,
+                rpe: traineeWorkouts[0].rpe,
+                load: traineeWorkouts[0].load,
+                date: traineeWorkouts[0].date
+              }
+            : null,
+        workoutHistory: traineeWorkouts.map((w) => ({
+          _id: w._id,
+          type: w.type,
+          duration: w.duration,
+          rpe: w.rpe,
+          load: w.load,
+          date: w.date
+        }))
       };
     });
 
-    const ratings = await CoachRating.find({ coach: coachId })
-      .populate("athlete", "name email")
-      .sort({ createdAt: -1 });
-
-    res.json({
-      coach: {
-        _id: req.user._id,
-        name: req.user.name,
-        avgRating: req.user.avgRating || 0,
-        ratingsCount: req.user.ratingsCount || 0
-      },
-      totalAthletes: athletes.length,
-      totalWorkouts: workouts.length,
-      totalLoad: workouts.reduce((sum, w) => sum + (w.load || 0), 0),
-      totalDuration: workouts.reduce((sum, w) => sum + (w.duration || 0), 0),
-      athletes: athleteSummaries,
-      ratings
-    });
+    res.json(response);
   } catch (error) {
+    console.error("getCoachTraineesDashboard error:", error);
     res.status(500).json({ message: error.message });
   }
 };

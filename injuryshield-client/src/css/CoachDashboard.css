@@ -102,3 +102,27 @@
   text-align: center;
   text-decoration: none;
 }
+
+.coach-dashboard-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.ai-insight-btn {
+  flex: 1;
+  min-width: 180px;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background: #3b82f6;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.ai-insight-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}

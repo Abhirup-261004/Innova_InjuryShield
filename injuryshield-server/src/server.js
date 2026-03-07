@@ -12,6 +12,7 @@ const formAnalysisRoutes = require("./routes/formAnalysisRoutes");
 const coachRoutes = require("./routes/coachRoutes");
 const geminiRoutes = require("./routes/geminiRoutes");
 const chatbotRoutes = require("./routes/chatbotRoutes");
+const coachAiRoutes = require("./routes/coachAiRoutes");
 
 const http = require("http");
 const initSocket = require("./socket"); // points to src/socket/index.js
@@ -97,6 +98,7 @@ app.use("/api/form-analysis", formAnalysisRoutes);
 app.use("/api/coaches", coachRoutes);
 app.use("/api/gemini",geminiRoutes);
 app.use("/api/chatbot", chatbotRoutes);
+app.use("/api/coach-ai", coachAiRoutes);
 
 // Start Server
 const PORT = process.env.PORT || 8000;

@@ -1,0 +1,90 @@
+.coach-ai-card {
+  margin-top: 16px;
+  padding: 16px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.coach-ai-risk {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 14px;
+  margin-bottom: 16px;
+}
+
+.coach-ai-risk.low {
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.25);
+}
+
+.coach-ai-risk.moderate {
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+.coach-ai-risk.high {
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+.coach-ai-risk h4 {
+  margin: 0 0 6px;
+}
+
+.coach-ai-risk p {
+  margin: 0;
+  color: #d1d5db;
+}
+
+.coach-ai-risk span {
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.coach-ai-section {
+  margin-bottom: 16px;
+}
+
+.coach-ai-section h5 {
+  margin-bottom: 8px;
+  font-size: 15px;
+}
+
+.coach-ai-section p,
+.coach-ai-section li {
+  color: #d1d5db;
+  line-height: 1.55;
+}
+
+.coach-ai-section ul {
+  padding-left: 18px;
+}
+
+.coach-ai-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.coach-ai-mini {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.coach-ai-mini span {
+  display: block;
+  color: #9ca3af;
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+.coach-ai-mini strong {
+  font-size: 18px;
+}
