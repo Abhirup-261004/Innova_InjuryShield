@@ -192,7 +192,6 @@ The app will be available at `http://localhost:5173`.
 - [x] Adaptive workout plan generation
 - [x] Smart exercise substitution
 - [x] Analytics dashboard
-- [ ] Wearable device integration (Fitbit, Garmin, Apple Watch)
 - [ ] Coach dashboard for athlete monitoring
 - [ ] Machine learning injury prediction model
 - [ ] Mobile app (iOS & Android)
